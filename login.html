@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GearFlow — Entrar</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <h1>GearFlow</h1>
+    <p class="muted">Acesse sua conta para gerenciar produtos, pedidos ou compras.</p>
+
+    <form id="loginForm" class="stack">
+      <label>
+        E-mail
+        <input type="email" name="email" required placeholder="admin@gearflow.com" />
+      </label>
+
+      <label>
+        Senha
+        <input type="password" name="password" required placeholder="••••••••" />
+      </label>
+
+      <button type="submit" class="btn primary">Entrar</button>
+      <p id="loginMsg" class="feedback" role="alert"></p>
+    </form>
+
+    <div class="demo-box">
+      <strong>Contas de demonstração (senha: <code>123456</code>):</strong>
+      <ul>
+        <li><code>admin@gearflow.com</code></li>
+        <li><code>vendedor@gearflow.com</code></li>
+        <li><code>cliente@gearflow.com</code></li>
+      </ul>
+    </div>
+
+    <p class="auth-footer">
+      Não tem conta? <a href="/cadastro">Criar cadastro</a>
+    </p>
+  </main>
+
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

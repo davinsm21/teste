@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf }}" />
+  <title>GearFlow — Painel</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body data-role="{{ u.role }}">
+  <header class="topbar">
+    <div class="brand">GearFlow</div>
+    <nav class="nav-tabs">
+      <button type="button" class="tab-btn active" data-tab="catalog">Catálogo</button>
+      <button type="button" class="tab-btn" data-tab="cart">Carrinho (<span id="cartCount">0</span>)</button>
+      <button type="button" class="tab-btn" data-tab="sales">Pedidos</button>
+      {% if u.role == 'admin' %}
+      <button type="button" class="tab-btn" data-tab="products">Produtos (Admin)</button>
+      {% endif %}
+    </nav>
+    <div class="user-bar">
+      <span>{{ u.name }} ({{ u.role }})</span>
+      <button type="button" id="logoutBtn" class="btn ghost">Sair</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <p id="appFeedback" class="feedback" role="status"></p>
+
+    <section id="tab-catalog" class="tab-panel active">
+      <div class="panel-head">
+        <h2>Catálogo de produtos</h2>
+        <input type="search" id="searchInput" placeholder="Buscar por nome ou categoria..." />
+      </div>
+      <div id="catalogGrid" class="grid"></div>
+    </section>
+
+    <section id="tab-cart" class="tab-panel">
+      <h2>Carrinho e checkout</h2>
+      <div id="cartItems" class="stack"></div>
+
+      <form id="checkoutForm" class="checkout-box stack">
+        <label>
+          Cupom de desconto
+          <div class="row">
+            <input type="text" id="couponCode" placeholder="Ex.: GEAR10" />
+            <button type="button" id="applyCouponBtn" class="btn">Aplicar</button>
+          </div>
+        </label>
+
+        <label>
+          Forma de pagamento
+          <select id="payMethod">
+            <option value="Pix">Pix</option>
+            <option value="Crédito">Crédito</option>
+            <option value="Débito">Débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Boleto">Boleto</option>
+          </select>
+        </label>
+
+        <label id="installmentsWrap" class="hidden">
+          Parcelas
+          <select id="installments">
+            <option value="1">1x</option>
+            <option value="2">2x</option>
+            <option value="3">3x</option>
+            <option value="6">6x</option>
+            <option value="12">12x</option>
+          </select>
+        </label>
+
+        <label>
+          Endereço de entrega
+          <input type="text" id="deliveryAddress" value="{{ u.address or '' }}" placeholder="Rua, número, bairro, cidade" />
+        </label>
+
+        <div class="totals">
+          <p>Subtotal: <strong id="subtotalText">R$ 0,00</strong></p>
+          <p>Desconto: <strong id="discountText">R$ 0,00</strong></p>
+          <p>Total: <strong id="totalText">R$ 0,00</strong></p>
+        </div>
+
+        <button type="submit" class="btn primary">Finalizar pedido</button>
+      </form>
+    </section>
+
+    <section id="tab-sales" class="tab-panel">
+      <h2>Histórico de pedidos</h2>
+      <div id="salesList" class="stack"></div>
+    </section>
+
+    {% if u.role == 'admin' %}
+    <section id="tab-products" class="tab-panel">
+      <h2>Novo produto</h2>
+      <form id="createProductForm" class="product-form stack">
+        <div class="row">
+          <label>
+            Nome
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            Categoria
+            <input type="text" name="category" required placeholder="Periféricos" />
+          </label>
+        </div>
+        <div class="row">
+          <label>
+            Preço (em centavos)
+            <input type="number" name="price" min="0" required placeholder="19990" />
+          </label>
+          <label>
+            Estoque inicial
+            <input type="number" name="stock" min="0" value="10" required />
+          </label>
+        </div>
+        <label>
+          Descrição
+          <input type="text" name="description" />
+        </label>
+        <button type="submit" class="btn primary">Salvar produto</button>
+      </form>
+    </section>
+    {% endif %}
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

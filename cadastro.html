@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GearFlow — Cadastro</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <h1>Criar conta</h1>
+    <p class="muted">Cadastre-se como cliente ou solicite acesso de vendedor.</p>
+
+    <form id="registerForm" class="stack">
+      <label>
+        Nome completo
+        <input type="text" name="name" required />
+      </label>
+
+      <label>
+        E-mail
+        <input type="email" name="email" required />
+      </label>
+
+      <label>
+        CPF
+        <input type="text" name="cpf" required placeholder="000.000.000-00" />
+      </label>
+
+      <label>
+        Telefone
+        <input type="text" name="phone" required placeholder="(85) 99999-9999" />
+      </label>
+
+      <label>
+        Tipo de conta
+        <select name="role" required>
+          <option value="cliente">Cliente</option>
+          <option value="vendedor">Vendedor</option>
+        </select>
+      </label>
+
+      <label>
+        Senha (mín. 6 caracteres)
+        <input type="password" name="password" minlength="6" required />
+      </label>
+
+      <button type="submit" class="btn primary">Cadastrar</button>
+      <p id="registerMsg" class="feedback" role="alert"></p>
+    </form>
+
+    <p class="auth-footer">
+      Já possui conta? <a href="/">Voltar ao login</a>
+    </p>
+  </main>
+
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>
